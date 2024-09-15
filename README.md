@@ -31,3 +31,48 @@
 
    ```bash
    git clone https://github.com/itsBikramRai/kinmel.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd kinmel
+   ```
+3. To run both frontend and backend together, use the following script
+
+    ```bash
+    Kinmel/
+    ├── frontend/    # Contains the React frontend code
+    ├── backend/     # Contains the backend code     with Node.js and Express
+    ├── package.json # Contains the scripts for running frontend and backend together
+    └── README.md    # Project documentation
+
+## Running Backend and Frontend Together 
+* package.json
+
+``` 
+{
+  "name": "kinmel",
+  "version": "1.0.0",
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm start",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
+```
+* Run
+```
+npm run dev
+```
+
+## Future Improvements
+
+- Add a review section for users to provide feedback.
+- Integrate payment gateways for a complete shopping experience.
+- OAuth for login and signup
+
+## License
+- This project currently has no license.
