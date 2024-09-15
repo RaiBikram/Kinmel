@@ -75,8 +75,5 @@ npm run dev
 - OAuth for login and signup
 
 ## License
-<<<<<<< HEAD
 - This project currently has no license.
-=======
-- This project currently has no license.
->>>>>>> de985961 (adding kinmel website)
+
