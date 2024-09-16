@@ -71,7 +71,7 @@ export default function Header() {
                     <li style={{
                       textAlign:"center",
                     }}>
-                    <Link className="dropdown-item" to="/home">
+                    <Link className="dropdown-item" to="/">
                     All Categories
                     </Link>
                       {/* <Link className="dropdown-item" to="/all-categories">
