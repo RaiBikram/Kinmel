@@ -73,7 +73,7 @@ npm run dev
 - Add a review section for users to provide feedback.
 - Integrate payment gateways for a complete shopping experience.
 - OAuth for login and signup
-## API 
+## APIs
 ```
 https://kinmel-backend.onrender.com/
 ```
