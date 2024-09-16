@@ -26,7 +26,7 @@ export default function Header() {
         <div className="row p-4" style={{ backgroundColor: "#cf293d", color: "white", width: "100%", margin: 0 , padding:0 }}>
           {/* Brand */}
           <div className="col-lg-3 col-md-4 col-6">
-            <Link to="/home" className="navbar-brand">
+            <Link to="/" className="navbar-brand">
               <RiShoppingBag4Fill /> Kinmel
             </Link>
           </div>
