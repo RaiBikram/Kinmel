@@ -73,9 +73,15 @@ npm run dev
 - Add a review section for users to provide feedback.
 - Integrate payment gateways for a complete shopping experience.
 - OAuth for login and signup
-- 
+## API 
+```
+https://kinmel-backend.onrender.com/
+```
+
  ## Contributing
 * Contributions are welcome! If you'd like to improve this project, feel free to open an issue or submit a pull request.
+
+
 ## License
 - This project currently has no license.
 
