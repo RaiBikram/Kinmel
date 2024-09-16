@@ -31,7 +31,7 @@ function App() {
     <>
     <Routes>
       {/* Public Routes */}
-      <Route path="/home" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/search" element={<Search />} />
       <Route path="/product/:slug" element={<ProductDetails />} />
       <Route path="/all-categories" element={<AllCategories />} />
