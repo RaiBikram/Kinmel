@@ -76,7 +76,6 @@ npm run dev
 - 
  ## Contributing
 * Contributions are welcome! If you'd like to improve this project, feel free to open an issue or submit a pull request.
-* 
 ## License
 - This project currently has no license.
 
