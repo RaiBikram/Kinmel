@@ -129,7 +129,7 @@ export default function HomePage() {
   }, [checked, radio]);
 
   return (
-    <Layout title="All Product - Best offers">
+    <Layout title="Kinmel - All Products - Best offers">
       <div className="row my-4">
         <div style={{ backgroundColor: "#f5eedc" }} className="col-2 ms-3">
           {/* Filter by category */}
