@@ -66,7 +66,6 @@
 * Run
 ```
 npm run dev
-npm start
 ```
 
 ## Future Improvements
