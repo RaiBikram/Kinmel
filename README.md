@@ -53,10 +53,10 @@
 {
   "name": "kinmel",
   "version": "1.0.0",
-  "scripts": {
-    "frontend": "cd frontend && npm start",
-    "backend": "cd backend && npm start",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+"scripts": {
+    "start:server": "npm start --prefix ./backend",
+    "start:client": "npm start --prefix ./client",
+    "dev": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
   "devDependencies": {
     "concurrently": "^6.2.0"
@@ -66,6 +66,7 @@
 * Run
 ```
 npm run dev
+npm start
 ```
 
 ## Future Improvements
