@@ -10,7 +10,7 @@ import DropIn from "braintree-web-drop-in-react";
 export default function CartPage() {
   const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
-  // const [clientToken, setClientToken] = useState("");
+  const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState(null); 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();

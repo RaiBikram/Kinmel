@@ -10,9 +10,9 @@ export default function Search() {
         <div className="text-center">
           <h1>Search Result</h1>
           <h6>
-            {values.results?.length < 1
+            {values?.results?.length < 1
               ? "No Product Found"
-              : `Found ${values.results.length}`}
+              : `Found ${values?.results?.length}`}
           </h6>
           <div className="row">
             {values?.results?.map((val) => (
