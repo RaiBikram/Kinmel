@@ -46,39 +46,39 @@ export default function CartPage() {
   };
 
   // Get Braintree payment gateway token
-  const getToken = async () => {
-    try {
-      const { data } = await API.get("/product/braintree/token");
-      setClientToken(data?.clientToken);
-    } catch (error) {
-      console.error("Error fetching Braintree token", error);
-    }
-  };
+  // const getToken = async () => {
+  //   try {
+  //     const { data } = await API.get("/product/braintree/token");
+  //     setClientToken(data?.clientToken);
+  //   } catch (error) {
+  //     console.error("Error fetching Braintree token", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (auth?.token) getToken();
-  }, [auth?.token]);
+  // useEffect(() => {
+  //   if (auth?.token) getToken();
+  // }, [auth?.token]);
 
-  // Handle payment
+  // // Handle payment
   const handlePayment = async () => {
-    try {
-      setLoading(true);
-      const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await API.post("/product/braintree/payment", {
-        nonce,
-        cart,
-      });
+  //   try {
+  //     setLoading(true);
+  //     const { nonce } = await instance.requestPaymentMethod();
+  //     const { data } = await API.post("/product/braintree/payment", {
+  //       nonce,
+  //       cart,
+  //     });
 
-      setLoading(false);
-      localStorage.removeItem("cart");
-      setCart([]);
-      navigate("/dashboard/user/order");
-      toast.success("Payment completed successfully.");
-    } catch (error) {
-      console.error("Payment error", error);
-      setLoading(false);
-      toast.error("Payment failed, please try again.");
-    }
+  //     setLoading(false);
+  //     localStorage.removeItem("cart");
+  //     setCart([]);
+  //     navigate("/dashboard/user/order");
+  //     toast.success("Payment completed successfully.");
+  //   } catch (error) {
+  //     console.error("Payment error", error);
+  //     setLoading(false);
+  //     toast.error("Payment failed, please try again.");
+  //   }
   };
 
   return (

@@ -12,5 +12,8 @@
     "concurrently": "^6.2.0"
   },
   "author": "Bikram Rai",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "joi": "^17.13.3"
+  }
 }

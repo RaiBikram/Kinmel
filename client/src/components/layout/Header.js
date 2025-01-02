@@ -20,10 +20,21 @@ export default function Header() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg sticky-top" style={{ width: "100%", marginTop: 0 , paddingTop: 0, 
-     }}>
-      <div className="container-fluid" style={{ padding: 0  ,margin:0}}>
-        <div className="row p-4" style={{ backgroundColor: "#cf293d", color: "white", width: "100%", margin: 0 , padding:0 }}>
+    <nav
+      className="navbar navbar-expand-lg sticky-top"
+      style={{ width: "100%", marginTop: 0, paddingTop: 0 }}
+    >
+      <div className="container-fluid" style={{ padding: 0, margin: 0 }}>
+        <div
+          className="row p-4"
+          style={{
+            backgroundColor: "#cf293d",
+            color: "white",
+            width: "100%",
+            margin: 0,
+            padding: 0,
+          }}
+        >
           {/* Brand */}
           <div className="col-lg-3 col-md-4 col-6">
             <Link to="/" className="navbar-brand">
@@ -68,19 +79,24 @@ export default function Header() {
                     Categories
                   </Link>
                   <ul className="dropdown-menu">
-                    <li style={{
-                      textAlign:"center",
-                    }}>
-                    <Link className="dropdown-item" to="/">
-                    All Categories
-                    </Link>
+                    <li
+                      style={{
+                        textAlign: "center",
+                      }}
+                    >
+                      <Link className="dropdown-item" to="/">
+                        All Categories
+                      </Link>
                       {/* <Link className="dropdown-item" to="/all-categories">
                         All Categories
                       </Link> */}
                     </li>
                     {categories?.map((cat) => (
                       <li key={cat._id}>
-                        <Link className="dropdown-item" to={`/category/${cat.slug}`}>
+                        <Link
+                          className="dropdown-item"
+                          to={`/category/${cat.slug}`}
+                        >
                           {cat.name}
                         </Link>
                       </li>
@@ -101,17 +117,26 @@ export default function Header() {
                     >
                       {auth?.user?.username}
                     </a>
-                    <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdownMenuLink"
+                    >
                       <li className="nav-item">
                         <NavLink
-                          to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
+                          to={`/dashboard/${
+                            auth?.user?.role === 1 ? "admin" : "user"
+                          }`}
                           className="dropdown-item"
                         >
                           Dashboard
                         </NavLink>
                       </li>
                       <li className="nav-item">
-                        <NavLink to="/login" className="dropdown-item" onClick={handleLogOut}>
+                        <NavLink
+                          to="/login"
+                          className="dropdown-item"
+                          onClick={handleLogOut}
+                        >
                           Logout
                         </NavLink>
                       </li>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from '../../contextAPI/Auth.Context';
 import { Outlet } from "react-router-dom";
 import Spinner from "../Spinner";
-import axios from "axios";
+import API from "../../utils/axiosInstance";
 
 export default function AdminRoute() {
   const [ok, setOk] = useState(false);
@@ -12,8 +12,8 @@ export default function AdminRoute() {
     const authCheck = async () => {
       try {
         // Make sure to set the Authorization header with the token
-        const res = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/admin-auth`);
-        if (res.data.ok) {
+        const res = API.get("/auth/admin-auth");
+        if (res?.data?.ok) {
           setOk(true);
         } else {
           setOk(false);

@@ -1,55 +1,44 @@
 import User from "../models/user.models.js";
-import { comparePassword, hashPassword } from "../utils/auth.utils.js";
+import {
+  answerHasher,
+  compareAnswer,
+  comparePassword,
+  hashPassword,
+} from "../utils/auth.utils.js";
 import JWT from "jsonwebtoken";
+import { userSchemaValidation } from "../validation/userSchemaValidation.js";
 
 // Register User
 export const registerController = async (req, res) => {
-  const { username, fullname, email, password, phone, address, answer } =
-    req.body;
-
   try {
-    // Input Validation
-    if (!fullname) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Name is required" });
-    }
-    if (!username) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Username is required" });
-    }
-    if (!email) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Email is required" });
-    }
-    if (!password) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Password is required" });
-    }
-    if (!phone) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Phone number is required" });
-    }
-    if (!address) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Address is required" });
-    }
-    if (!answer) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Answer is required" });
-    }
+    // Destructure fields from req.body
+    const {
+      username,
+      fullname,
+      email,
+      password,
+      confirmPassword,
+      phone,
+      address,
+      answer,
+    } = req.body;
 
-    // Check for existing user
+    // Validate user input using Joi schema
+    const { error } = userSchemaValidation.validate(req.body);
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.details[0].message,
+      });
+    }
+    if (password.trim() !== confirmPassword.trim()) {
+      return res.status(400).message("Password should match ");
+    }
+    // Check if user already exists
     const existingUser = await User.findOne({
       $or: [
-        { email: email?.toLowerCase() },
-        { username: username?.toLowerCase() },
+        { email: email?.toLowerCase()?.trim() },
+        { username: username?.toLowerCase()?.trim() },
         { phone },
       ],
     });
@@ -64,18 +53,24 @@ export const registerController = async (req, res) => {
     // Hash the password
     const hashedPassword = await hashPassword(password);
 
+    // Hash the answer (for security questions or similar)
+    const hashedAnswer = await answerHasher(answer);
+
     // Create new user
     const newUser = new User({
       fullname,
-      email: email.toLowerCase(),
+      email: email.toLowerCase().trim(),
       phone,
       address,
       password: hashedPassword,
-      username: username.toLowerCase(),
-      answer,
+      username: username.toLowerCase().trim(),
+      answer: hashedAnswer,
     });
 
+    // Save the user in the database
     await newUser.save();
+
+    // Respond with success
     return res.status(201).json({
       success: true,
       message: "User registered successfully",
@@ -98,6 +93,56 @@ export const registerController = async (req, res) => {
   }
 };
 
+// // Input Validation
+// if (!fullname) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Name is required" });
+// }
+// if (!username) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Username is required" });
+// }
+// if (!email) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Email is required" });
+// }
+// if (!password) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Password is required" });
+// }
+// if (!confirmPassword) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Confirm Password is required" });
+// }
+// if (password !== confirmPassword) {
+//   return res.status(400).json({
+//     success: false,
+//     message: "Password and Confirm Password do not match",
+//   });
+// }
+// if (!phone) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Phone number is required" });
+// }
+// if (!address) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Address is required" });
+// }
+// if (!answer) {
+//   return res
+//     .status(400)
+//     .json({ success: false, message: "Answer is required" });
+// }
+
+// Check for existing user
+
 // Login User
 export const loginController = async (req, res) => {
   const { identifier, password } = req.body;
@@ -116,6 +161,7 @@ export const loginController = async (req, res) => {
         message: "Password is required",
       });
     }
+
     // find user
     const user = await User.findOne({
       $or: [
@@ -171,7 +217,7 @@ export const loginController = async (req, res) => {
 
 // Forgot Password / Reset Password
 export const forgotPasswordController = async (req, res) => {
-  const { identifier, answer, newPassword } = req.body;
+  const { identifier, answer, newPassword, confirmPassword } = req.body;
 
   try {
     // Validate input
@@ -191,6 +237,19 @@ export const forgotPasswordController = async (req, res) => {
         .status(400)
         .json({ success: false, message: "New password is required" });
     }
+    if (!confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Confirm Password is required",
+      });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "password and Confirm Password does not match",
+      });
+    }
 
     // Find user with provided identifier and answer
     const user = await User.findOne({
@@ -199,7 +258,6 @@ export const forgotPasswordController = async (req, res) => {
         { email: identifier?.toLowerCase() },
         { phone: identifier },
       ],
-      answer: answer?.trim(), // Assuming answer needs to be trimmed
     });
 
     // Check if user exists
@@ -208,8 +266,11 @@ export const forgotPasswordController = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Invalid identifier or answer" });
     }
+
+    // compare answer
+    const isMatchAnswer = await compareAnswer(answer, user.answer);
     // Verify secret answer
-    if (user?.answer !== answer) {
+    if (!isMatchAnswer) {
       return res.status(400).json({
         success: false,
         message: "Your secret answer does not match",
@@ -284,3 +345,4 @@ export const updateProfileController = async (req, res) => {
     });
   }
 };
+

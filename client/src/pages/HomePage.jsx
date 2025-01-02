@@ -70,23 +70,6 @@ export default function HomePage() {
     }
   };
 
-  // // page
-  // // Fetch all products
-  // const getAllProductPage = async () => {
-  //   try {
-  //     setLoadingFilter(true);
-  //     setLoadingPage(true);
-  //     const { data } = await API.get(`/product/product-list/${page}`);
-  //     setLoadingPage(false);
-  //     setProducts(data.products);
-  //   } catch (error) {
-  //     setLoadingPage(false);
-  //     console.log(error);
-  //     toast.error("An error occurred while fetching products.");
-  //   } finally {
-  //     setLoadingFilter(false);
-  //   }
-  // };
 
   // Apply filters
   const filterProduct = async () => {

@@ -3,18 +3,10 @@ import slugify from "slugify";
 import fs from "fs";
 import mongoose from "mongoose";
 import Category from "../models/category.models.js";
-import braintree from "braintree";
-import Order from "../models/order.models.js";
+
 import { configDotenv } from "dotenv";
 
 configDotenv();
-// //payment getway
-// var gateway = new braintree.BraintreeGateway({
-//   environment: braintree.Environment.Sandbox,
-//   merchantId: process.env.BRAINTREE_MERCHAND_ID,
-//   publicKey: process.env.BRAINTREE_PUBLIC_KEY,
-//   privateKey: process.env.BRAINTREE_PRIVATE_KEY,
-// });
 
 //create
 export const createProductController = async (req, res) => {
@@ -52,7 +44,9 @@ export const createProductController = async (req, res) => {
     }
 
     await newProduct.save();
-    return res.status(200).json({
+    return res
+    .status(200)
+    .json({
       succcess: true,
       message: "Product is created successfull",
       products: newProduct,
@@ -373,67 +367,3 @@ export const productCategoryController = async (req, res) => {
   }
 };
 
-
-
-// //braintree Token || payment getway Token
-// export const brainTreeTokenController = async (req, res) => {
-//   try {
-//     gateway.clientToken.generate({}),
-//       (err, response) => {
-//         if (err) {
-//           return res.status(500).json({
-//             succcess: false,
-//             error: err,
-//           });
-//         } else {
-//           return res.status(200).json(response);
-//         }
-//       };
-//   } catch (error) {
-//     return res.status(400).json({
-//       succcess: false,
-//       message: "Error While accessing the token ",
-//     });
-//   }
-// };
-
-// // payment
-// export const brainTreePaymentController = async (req, res) => {
-//   try {
-//     const { cart, nonce } = req.body;
-//     let total = 0;
-//     cart.map((item) => {
-//       total += item;
-//     });
-
-//     // transaction
-//     let newTransaction = gateway.transaction.sale(
-//       {
-//         amount: total.toFixed(2),
-//         paymentMethodNonce: nonce,
-//         options: {
-//           submitForSettlement: true,
-//         },
-//       },
-//       async (error, result) => {
-//         if (result) {
-//           const order = new Order.find({
-//             products: cart,
-//             payment: result,
-//             buyer: req.user._id,
-//           });
-//           await order.save();
-
-//           return res.status(200).json({ ok: true });
-//         } else {
-//           return res.status(500).json(error);
-//         }
-//       }
-//     );
-//   } catch (error) {
-//     return res.status(400).json({
-//       succcess: false,
-//       message: "Error While try to payment ",
-//     });
-//   }
-// };

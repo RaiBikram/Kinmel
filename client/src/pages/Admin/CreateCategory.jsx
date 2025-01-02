@@ -17,9 +17,7 @@ export default function CreateCategory() {
   const handleForm = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await API.post("category/create-category",
-        { name }
-      );
+      const { data } = await API.post("category/create-category", { name });
       if (data.success) {
         toast.success(`${name} is created.`);
         setName(""); // Clear the form field
@@ -35,9 +33,7 @@ export default function CreateCategory() {
   // Get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await API.get(
-        `category/all-category`
-      );
+      const { data } = await API.get(`category/all-category`);
       if (data?.success) {
         setCategories(data.allCategories);
       } else {
@@ -61,7 +57,7 @@ export default function CreateCategory() {
     }
     try {
       const { data } = await API.put(
-        "category/update-category/${selected._id}", 
+        "category/update-category/${selected._id}",
         { name: updatedName }
       );
       if (data?.success) {
@@ -77,8 +73,6 @@ export default function CreateCategory() {
       toast.error("Something went wrong while updating the category.");
     }
   };
-  
-  
 
   // Handle category deletion
   const handleDelete = async (categoryId) => {

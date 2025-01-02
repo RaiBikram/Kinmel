@@ -1,4 +1,4 @@
-import{Routes,Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -23,51 +23,51 @@ import ProductDetails from "./pages/ProductDetails";
 import AllCategories from "./pages/AllCategories";
 import CategoryProduct from "./pages/CategoryProduct";
 import CartPage from "./pages/CartPage";
-import UserUpdate from "./pages/user/UserProfile"
-
+import UserUpdate from "./pages/user/UserProfile";
 
 function App() {
   return (
     <>
-    <Routes>
-      {/* Public Routes */}
-      <Route path="/" element={<HomePage />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/product/:slug" element={<ProductDetails />} />
-      <Route path="/all-categories" element={<AllCategories />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/category/:slug" element={<CategoryProduct />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/policy" element={<Plolicy />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      
-      {/* Protected User Route */}
-      <Route path="/dashboard"  element={<PrivateRoute />}>
-          <Route path="user"  element={<UserDashboard />} />
-          <Route path="user/profile"  element={<UserProfile />} />
-          <Route path="user/profile-update"  element={<UserUpdate />} />
-          <Route path="user/orders"  element={<UserOrders />} />
-        
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/all-categories" element={<AllCategories />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/category/:slug" element={<CategoryProduct />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/policy" element={<Plolicy />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Protected User Route */}
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="user" element={<UserDashboard />} />
+          <Route path="user/profile" element={<UserProfile />} />
+          <Route path="user/profile-update" element={<UserUpdate />} />
+          <Route path="user/orders" element={<UserOrders />} />
         </Route>
-      
-      {/* Protected Admin Route */}
-      <Route path="/dashboard" element={<AdminRoute />}>
-        <Route path="admin" element={<AdminDashboard/>} />
-        <Route path="admin/cretate-category" element={<CreateCategory/>} />
-        <Route path="admin/cretate-product" element={<CreateProduct/>} />
-        <Route path="admin/update-product/:slug" element={<UpdateProduct/>} />
-        <Route path="admin/products" element={<Products/>} />
-        <Route path="admin/all-user" element={<Users/>} />
-      </Route>
-      
-      {/* Catch-All Route */}
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+
+        {/* Protected Admin Route */}
+        <Route path="/dashboard" element={<AdminRoute />}>
+          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/cretate-category" element={<CreateCategory />} />
+          <Route path="admin/cretate-product" element={<CreateProduct />} />
+          <Route
+            path="admin/update-product/:slug"
+            element={<UpdateProduct />}
+          />
+          <Route path="admin/products" element={<Products />} />
+          <Route path="admin/all-user" element={<Users />} />
+        </Route>
+
+        {/* Catch-All Route */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </>
-  
   );
 }
 

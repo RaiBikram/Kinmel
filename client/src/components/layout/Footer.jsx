@@ -103,7 +103,7 @@ export default function Footer() {
           {/* <div className="col-2"></div> */}
           <div className="col-2 footer mt-2" style={{ fontSize: "10px" }}>
             Designed & Developed by: &nbsp;
-            <a href="https://bikramrai-portfolio.vercel.app/">Bikram Rai</a>
+            <a href="https://bikramrai-portfolio.vercel.app">Bikram Rai</a>
           </div>
         </div>
       </div>

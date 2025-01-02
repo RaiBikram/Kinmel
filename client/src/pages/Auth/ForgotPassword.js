@@ -8,6 +8,7 @@ export default function ForgotPassword() {
   const [identifier, setIdentifier] = useState(""); // username, email, or phone
   const [answer, setAnswer] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,6 +21,7 @@ export default function ForgotPassword() {
         // Using identifier for username, email, or phone
         answer: answer.trim(),
         newPassword: newPassword,
+        confirmNewPassword: confirmNewPassword,
       });
 
       if (res?.data?.success) {
@@ -37,79 +39,88 @@ export default function ForgotPassword() {
   return (
     <Layout title={"Forgot-Password - Kinmel"}>
       <div className="row justify-content-center m-2 mt-5 ">
-        <div className="col-12 col-sm-12 col-md-6 col-lg-4 rounded"
-         style={{
-          backgroundColor: "#006699",
-        }}
+        <div
+          className="col-12 col-sm-12 col-md-6 col-lg-4 rounded"
+          style={{
+            backgroundColor: "#006699",
+          }}
         >
-          <h1 style={{ color: "#bfbfbf" }} className="mt-3 border-bottom text-center">Reset Password</h1>
-         
+          <h1
+            style={{ color: "#bfbfbf" }}
+            className="mt-3 border-bottom text-center"
+          >
+            Reset Password
+          </h1>
+
           <form
             className="row needs-validation mx-5"
             noValidate
             onSubmit={handleSubmit}
           >
-         <div className="col">
-                <input
-                  type="text"
-                  className="form-control my-3"
-                  id="identifier"
-                  value={identifier}
-                  onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder="Username, Email, or Phone"
-                  required
-                />
+            <div className="col">
+              <input
+                type="text"
+                className="form-control my-3"
+                id="identifier"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                placeholder="Username, Email, or Phone"
+                required
+              />
 
-                <input
-                  type="text"
-                  className="form-control my-3"
-                  id="answer"
-                  value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
-                  placeholder="Enter your secret answer"
-                  required
-                />
-   
-                <input
-                  type="password"
-                  className="form-control my-3"
-                  id="newPassword"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="Enter your new password"
-                  required
-                />
+              <input
+                type="text"
+                className="form-control my-3"
+                id="answer"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                placeholder="Enter your secret answer"
+                required
+              />
 
+              <input
+                type="password"
+                className="form-control my-3"
+                id="newPassword"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="Enter your new password"
+                required
+              />
+              <input
+                type="password"
+                className="form-control my-3"
+                id="confirmNewPassword"
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                placeholder="Enter your confirm new password"
+                required
+              />
 
-            <div className="text-center mt-5">
-              <button type="submit" className="btn btn-success">
-                Reset
-              </button>
-              <br/>
-              <a
-              className=" my-3"
-              type="button"
-              style={{
-                color: "white",
+              <div className="text-center mt-5">
+                <button type="submit" className="btn btn-success">
+                  Reset
+                </button>
+                <br />
+                <a
+                  className=" my-3"
+                  type="button"
+                  style={{
+                    color: "white",
 
-                textAlign: "center",
-              }}
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Login
-            </a>
-
+                    textAlign: "center",
+                  }}
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  Login
+                </a>
+              </div>
             </div>
-
-
-             </div>
-            
           </form>
         </div>
-        </div>
-   
+      </div>
     </Layout>
   );
 }

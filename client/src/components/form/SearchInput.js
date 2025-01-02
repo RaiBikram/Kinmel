@@ -52,8 +52,8 @@ export default function SearchInput() {
             style={{
               backgroundColor: "white",
               color: "black",
-              borderColor:"white",
-              fontSize:"12px"
+              borderColor: "white",
+              fontSize: "12px",
             }}
           >
             Search

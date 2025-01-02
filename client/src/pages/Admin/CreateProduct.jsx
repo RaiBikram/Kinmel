@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -23,9 +22,7 @@ export default function CreateProduct() {
   // Fetch all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await API.get(
-        "/category/all-category"
-      );
+      const { data } = await API.get("/category/all-category");
       if (data?.success) {
         setCategories(data.allCategories);
       } else {
@@ -56,13 +53,10 @@ export default function CreateProduct() {
       productData.append("shipping", shipping);
       productData.append("price", price);
 
-      const response = await API.post("/product/create-product",
-        productData
-      );
+      const response = await API.post("/product/create-product", productData);
       if (response?.data?.success) {
         toast.success("Product created successfully!");
-       navigate("/dashboard/admin/products");
-       
+        navigate("/dashboard/admin/products");
       } else {
         toast.error(response?.data?.message || "Failed to create product.");
       }
@@ -73,14 +67,16 @@ export default function CreateProduct() {
 
   return (
     <Layout title={"Dashboard - Create Product"}>
-      <div className="row my-5   " >
-        
+      <div className="row my-5   ">
         <div className="col-lg-3 mx-3">
           <AdminMenu />
         </div>
-        <div className="col-lg-6 p-5 justify-content-center"   style={{
-      backgroundColor: "#006699",
-    }}>
+        <div
+          className="col-lg-6 p-5 justify-content-center"
+          style={{
+            backgroundColor: "#006699",
+          }}
+        >
           <h1 className="border-bottom">Create Product</h1>
           <div className="col m-1">
             <Select
