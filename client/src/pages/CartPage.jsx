@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import { useCart } from "../contextAPI/cartContext";
 import { useAuth } from "../contextAPI/Auth.Context";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import DropIn from "braintree-web-drop-in-react";
-import API from "../utils/axiosInstance";
+// import API from "../utils/axiosInstance";
 
 export default function CartPage() {
   const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
-  const [clientToken, setClientToken] = useState("");
-  const [instance, setInstance] = useState(null); // Ensure instance is initially null
+  // const [clientToken, setClientToken] = useState("");
+  const [instance, setInstance] = useState(null); 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
