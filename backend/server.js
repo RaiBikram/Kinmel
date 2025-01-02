@@ -12,12 +12,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://kinmel.onrender.com"], // Frontend URL
+    origin:"*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
-
 
 // config
 dotenv.config();

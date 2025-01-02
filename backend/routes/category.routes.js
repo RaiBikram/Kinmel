@@ -32,12 +32,12 @@ router.get("/all-category", allCategoryController);
 //single category
 router.get("/single-category/:id", singleCategoryController);
 
-
-//delete category 
-router.delete("/delete-category/:id", requireSignIn, isAdmin, deleteCategoryController);
-
-
-
-
+//delete category
+router.delete(
+  "/delete-category/:id",
+  requireSignIn,
+  isAdmin,
+  deleteCategoryController
+);
 
 export default router;

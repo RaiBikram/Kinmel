@@ -93,55 +93,7 @@ export const registerController = async (req, res) => {
   }
 };
 
-// // Input Validation
-// if (!fullname) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Name is required" });
-// }
-// if (!username) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Username is required" });
-// }
-// if (!email) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Email is required" });
-// }
-// if (!password) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Password is required" });
-// }
-// if (!confirmPassword) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Confirm Password is required" });
-// }
-// if (password !== confirmPassword) {
-//   return res.status(400).json({
-//     success: false,
-//     message: "Password and Confirm Password do not match",
-//   });
-// }
-// if (!phone) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Phone number is required" });
-// }
-// if (!address) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Address is required" });
-// }
-// if (!answer) {
-//   return res
-//     .status(400)
-//     .json({ success: false, message: "Answer is required" });
-// }
 
-// Check for existing user
 
 // Login User
 export const loginController = async (req, res) => {

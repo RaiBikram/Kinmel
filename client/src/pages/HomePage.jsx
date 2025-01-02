@@ -15,34 +15,29 @@ export default function HomePage() {
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
   const [loadingFilter, setLoadingFilter] = useState(false);
-  const [loadingPage, setLoadingPage] = useState(false);
-  const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
+  // const [total, setTotal] = useState(0);
+  // const [page, setPage] = useState(1);
 
-  // get total count
-  const getToatl = async () => {
-    try {
-      const { data } = await API.get("product/product-count");
-      setTotal(data?.total_product);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Get total product count
+  // const getTotal = async () => {
+  //   try {
+  //     const { data } = await API.get("product/product-count");
+  //     setTotal(data?.total_product);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  // Handle filter change for categories
-  const handleFilter = (booleanVal, id) => {
-    let updatedChecked = [...checked];
-
-    if (booleanVal) {
-      updatedChecked.push(id);
-    } else {
-      updatedChecked = updatedChecked.filter((c) => c !== id);
-    }
+  // Handle category filter
+  const handleFilter = (checkedValue, id) => {
+    const updatedChecked = checkedValue
+      ? [...checked, id]
+      : checked.filter((c) => c !== id);
     setChecked(updatedChecked);
   };
 
   // Fetch all categories
-  const getAllCategory = async () => {
+  const getAllCategories = async () => {
     try {
       const { data } = await API.get("/category/all-category");
       if (data?.success) {
@@ -51,7 +46,6 @@ export default function HomePage() {
         toast.error(data.message || "Failed to fetch categories.");
       }
     } catch (error) {
-      console.log(error);
       toast.error("An error occurred while fetching categories.");
     }
   };
@@ -63,16 +57,14 @@ export default function HomePage() {
       const { data } = await API.get("/product/get-all-product");
       setProducts(data.products);
     } catch (error) {
-      console.log(error);
       toast.error("An error occurred while fetching products.");
     } finally {
       setLoadingFilter(false);
     }
   };
 
-
   // Apply filters
-  const filterProduct = async () => {
+  const filterProducts = async () => {
     try {
       setLoadingFilter(true);
       const { data } = await API.post("/product/product-filters", {
@@ -91,21 +83,20 @@ export default function HomePage() {
   const resetFilters = () => {
     setChecked([]);
     setRadio([]);
-    getAllProducts(); // Fetch all products again
+    getAllProducts(); // Reload all products
   };
 
-  // Fetch categories and products initially
+  // Initial data fetch
   useEffect(() => {
-    getAllCategory();
+    getAllCategories();
     getAllProducts();
-    // getAllProductPage();
-    getToatl();
+    // getTotal();
   }, []);
 
-  // Apply filters when they change
+  // Fetch products when filters change
   useEffect(() => {
     if (checked.length || radio.length) {
-      filterProduct();
+      filterProducts();
     } else {
       getAllProducts();
     }
@@ -114,11 +105,11 @@ export default function HomePage() {
   return (
     <Layout title="Kinmel - All Products - Best offers">
       <div className="row my-4">
+        {/* Sidebar for filters */}
         <div style={{ backgroundColor: "#f5eedc" }} className="col-2 ms-3">
-          {/* Filter by category */}
           <h4 className="my-3 border-bottom">Filter By Category</h4>
           <div className="d-flex flex-column">
-            {categories?.map((cat) => (
+            {categories.map((cat) => (
               <Checkbox
                 key={cat._id}
                 checked={checked.includes(cat._id)}
@@ -129,13 +120,10 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Filter by price */}
           <h4 className="my-3 border-bottom">Filter By Price</h4>
           <Radio.Group
             value={radio}
             onChange={(e) => setRadio(e.target.value)}
-            // onChange={(e) => setRadio(window.location.reload())}
-
             className="d-flex flex-column"
           >
             {prices.map((p) => (
@@ -144,28 +132,29 @@ export default function HomePage() {
               </Radio>
             ))}
           </Radio.Group>
-          <div className="row-2 mt-3">
+          <div className="mt-3">
             <button onClick={resetFilters} className="btn btn-danger">
-              Reset Filter
+              Reset Filters
             </button>
           </div>
         </div>
 
+        {/* Product list */}
         <div className="col-9">
           <h1 className="text-center border-bottom">All Products</h1>
-
           {loadingFilter ? (
-            <h3 className="text-center ">Loading...</h3>
+            <h3 className="text-center">Loading...</h3>
           ) : (
             <div className="row">
-              {products?.map((product) => (
+              {products.map((product) => (
                 <div className="col-md-4 col-lg-4 col-sm-4" key={product._id}>
-                  <div className="card m-3 ">
+                  <div className="card m-3">
                     <img
                       className="card-img-top"
                       style={{ height: "200px", objectFit: "cover" }}
                       src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                       alt={product.name}
+                      loading="lazy"
                     />
                     <div className="card-body">
                       <h5 className="card-title">{product.name}</h5>
@@ -199,20 +188,6 @@ export default function HomePage() {
             </div>
           )}
         </div>
-        {/* //page loading */}
-        {/* <div className="m-2 p-3 text-center">
-          {products && products.length < total && (
-            <button
-              className="btn btn-warning"
-              onClick={(e) => {
-                e.preventDefault();
-                setPage(page + 1);
-              }}
-            >
-              {loadingPage ? "Loading ..." : "Loadmore"}
-            </button>
-          )}
-        </div> */}
       </div>
     </Layout>
   );
