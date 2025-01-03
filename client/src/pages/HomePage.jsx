@@ -35,33 +35,39 @@ export default function HomePage() {
       : checked.filter((c) => c !== id);
     setChecked(updatedChecked);
   };
-
-  // Fetch all categories
+//get all categories 
   const getAllCategories = async () => {
     try {
       const { data } = await API.get("/category/all-category");
       if (data?.success) {
-        setCategories(data.allCategories);
+        setCategories(data?.allCategories);
       } else {
-        toast.error(data.message || "Failed to fetch categories.");
+        toast.error(data?.message || "Failed to fetch categories.");
       }
     } catch (error) {
       toast.error("An error occurred while fetching categories.");
+      console.error("Error fetching categories:", error); // Log the error
     }
   };
-
-  // Fetch all products
+  
+  //get all products
   const getAllProducts = async () => {
     try {
       setLoadingFilter(true);
       const { data } = await API.get("/product/get-all-product");
-      setProducts(data.products);
+      if (data?.products?.length > 0) {
+        setProducts(data?.products);
+      } else {
+        toast.error("No products available.");
+      }
     } catch (error) {
       toast.error("An error occurred while fetching products.");
+      console.error("Error fetching products:", error); // Log the error
     } finally {
       setLoadingFilter(false);
     }
   };
+  
 
   // Apply filters
   const filterProducts = async () => {
