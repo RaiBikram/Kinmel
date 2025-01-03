@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../contextAPI/Auth.Context";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import Spinner from "../Spinner";
 import API from "../../utils/axiosInstance";
 

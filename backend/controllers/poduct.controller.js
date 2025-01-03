@@ -69,6 +69,13 @@ export const getAllProductController = async (req, res) => {
       .limit(12) // Limit results to 12 documents
       .sort({ createdAt: -1 }); // Sort by 'createdAt' in descending order
 
+      if(!allProduct){
+        return res.status(400).json({
+          succcess: false,
+          message: "Not getting product lists ",
+
+      })
+    }
     return res.status(200).json({
       succcess: true,
       message: "Getting All product successfully ",
@@ -76,7 +83,7 @@ export const getAllProductController = async (req, res) => {
       total_Count: allProduct.length,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       succcess: false,
       message: "Error while getting all product ",
       Error: error.message,
