@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { toast } from "react-hot-toast";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../contextAPI/Auth.Context";
 import API from "../../utils/axiosInstance";
 
@@ -104,13 +104,13 @@ export default function Login() {
               </a>
               <hr style={{ color: "white" }} />
 
-              <a
+              <Link
                 style={{ color: "white" }}
                 className="btn btn-outline-dark rounded"
-                href="/#/register"
+                to="/register"
               >
                 Create Your Kinmel Account
-              </a>
+              </Link>
             </div>
           </form>
         </div>
