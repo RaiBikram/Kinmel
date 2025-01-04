@@ -107,7 +107,7 @@ export default function Login() {
               <a
                 style={{ color: "white" }}
                 className="btn btn-outline-dark rounded"
-                href="/register"
+                href="/#/register"
               >
                 Create Your Kinmel Account
               </a>
