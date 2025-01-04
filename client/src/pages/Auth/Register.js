@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { toast } from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import API from "../../utils/axiosInstance";
 
 export default function Register() {
@@ -143,9 +143,9 @@ export default function Register() {
               <br />
               <h6 style={{ color: "#bfbfbf" }}>
                 Already have an account? &nbsp;
-                <Link style={{ color: "white" }} to="/login">
+                <NavLink style={{ color: "white" }} to="/login">
                   login
-                </Link>
+                </NavLink>
               </h6>
             </div>
           </form>
