@@ -4,7 +4,7 @@ import "./index.css";
 import 'antd/dist/reset.css';
 import App from "./App";
 
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { AuthContextProvider } from "./contextAPI/Auth.Context";
 import { SearchContextProvider } from "./contextAPI/SearchContext";
 import { CartContextProvider } from "./contextAPI/cartContext";
