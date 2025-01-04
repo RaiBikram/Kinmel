@@ -142,7 +142,6 @@ export default function Register() {
               <br />
               <br />
               <h6 style={{ color: "#bfbfbf" }}>
-                {" "}
                 Already have an account? &nbsp;
                 <Link style={{ color: "white" }} to="/login">
                   login
