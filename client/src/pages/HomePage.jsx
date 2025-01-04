@@ -35,7 +35,7 @@ export default function HomePage() {
       : checked.filter((c) => c !== id);
     setChecked(updatedChecked);
   };
-//get all categories 
+  //get all categories
   const getAllCategories = async () => {
     try {
       const { data } = await API.get("/category/all-category");
@@ -49,7 +49,7 @@ export default function HomePage() {
       console.error("Error fetching categories:", error); // Log the error
     }
   };
-  
+
   //get all products
   const getAllProducts = async () => {
     try {
@@ -67,7 +67,6 @@ export default function HomePage() {
       setLoadingFilter(false);
     }
   };
-  
 
   // Apply filters
   const filterProducts = async () => {
@@ -112,7 +111,10 @@ export default function HomePage() {
     <Layout title="Kinmel - All Products - Best offers">
       <div className="row my-4">
         {/* Sidebar for filters */}
-        <div style={{ backgroundColor: "#f5eedc" }} className="col-2 ms-3">
+        <div
+          style={{ backgroundColor: "#f5eedc" }}
+          className="col-12 col-md-3 mb-3"
+        >
           <h4 className="my-3 border-bottom">Filter By Category</h4>
           <div className="d-flex flex-column">
             {categories.map((cat) => (
@@ -146,14 +148,17 @@ export default function HomePage() {
         </div>
 
         {/* Product list */}
-        <div className="col-9">
+        <div className="col-12 col-md-9">
           <h1 className="text-center border-bottom">All Products</h1>
           {loadingFilter ? (
             <h3 className="text-center">Loading...</h3>
           ) : (
             <div className="row">
               {products.map((product) => (
-                <div className="col-md-4 col-lg-4 col-sm-4" key={product._id}>
+                <div
+                  className="col-12 col-sm-6 col-md-4 col-lg-4"
+                  key={product._id}
+                >
                   <div className="card m-3">
                     <img
                       className="card-img-top"
