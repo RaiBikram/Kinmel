@@ -62,7 +62,6 @@ export default function HomePage() {
       }
     } catch (error) {
       toast.error("An error occurred while fetching products.");
-      console.error("Error fetching products:", error); // Log the error
     } finally {
       setLoadingFilter(false);
     }

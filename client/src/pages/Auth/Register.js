@@ -13,6 +13,7 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
+  const [res, setRes] = useState("");
   // const [check, setChecked] = useState(false);
   const navigate = useNavigate();
   // handleSubmit
@@ -35,12 +36,13 @@ export default function Register() {
         navigate("/login");
       } else {
         toast.error(res?.data?.message);
+        setRes(res.data);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("something went wrong");
+      toast.error(error?.response?.data?.message || error.message);
     }
   };
+  console.log(res);
   return (
     <Layout title={"Register - Kinmel"}>
       <div className="row justify-content-center m-5">

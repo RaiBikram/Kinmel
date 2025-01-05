@@ -31,8 +31,7 @@ export default function ForgotPassword() {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong");
+      toast.error(error?.response?.data?.message || error.message);
     }
   };
 

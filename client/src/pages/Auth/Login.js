@@ -38,7 +38,7 @@ export default function Login() {
         toast.error(res?.data?.message);
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error(error?.response?.data?.message || error.message);
     }
   };
 
