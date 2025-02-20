@@ -19,13 +19,13 @@ import {
   updateProductController,
 } from "../controllers/poduct.controller.js";
 
-const router = Router();
+const productRouter = Router();
 
 //routes
 
 //create product
 
-router.post(
+productRouter.post(
   "/create-product",
   requireSignIn,
   isAdmin,
@@ -34,19 +34,19 @@ router.post(
 );
 
 // get all product
-router.get("/get-all-product", getAllProductController);
+productRouter.get("/get-all-product", getAllProductController);
 
 //single
-router.get("/get-single-product/:slug", getSingleProductController);
+productRouter.get("/get-single-product/:slug", getSingleProductController);
 
 //get photo
-router.get("/product-photo/:pid", getProductPhotoController);
+productRouter.get("/product-photo/:pid", getProductPhotoController);
 
 // delete product
-router.delete("/delete-product/:pid", deleteProductItemController);
+productRouter.delete("/delete-product/:pid", deleteProductItemController);
 
 // update product
-router.put(
+productRouter.put(
   "/update-product/:pid",
   requireSignIn,
   isAdmin,
@@ -55,27 +55,27 @@ router.put(
 );
 
 // filter product
-router.post("/product-filters", productFilterControllers);
+productRouter.post("/product-filters", productFilterControllers);
 
 //product count
-router.get("/product-count", productCountControllers);
+productRouter.get("/product-count", productCountControllers);
 
 //product per page
-router.get("/product-list/:page", productListController);
+productRouter.get("/product-list/:page", productListController);
 
 //search product
-router.get("/search/:keywords", searchProductController);
+productRouter.get("/search/:keywords", searchProductController);
 
 //similar product
-router.get("/related-product/:pid/:cid", relatedProductController);
+productRouter.get("/related-product/:pid/:cid", relatedProductController);
 
 //category wise product
-router.get("/product-category/:slug", productCategoryController);
+productRouter.get("/product-category/:slug", productCategoryController);
 
 // //payment routes || getting token
-// router.get("/braintree/token", brainTreeTokenController);
+// productRouter.get("/braintree/token", brainTreeTokenController);
 
 // //payment
-// router.post("/braintree/payment", requireSignIn, brainTreePaymentController);
+// productRouter.post("/braintree/payment", requireSignIn, brainTreePaymentController);
 
-export default router;
+export default productRouter;

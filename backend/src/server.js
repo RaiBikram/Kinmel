@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import morgan from "morgan";
 import cors from "cors";
-
 import authRoutes from "./routes/auth.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import productRouter from "./routes/product.routes.js";
@@ -12,10 +11,10 @@ const app = express();
 
 app.use(
   cors({
-    origin:process.env.CORS_ORIGIN || "*",
+    origin: process.env.CORS_ORIGIN || "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  }),
+  })
 );
 
 // config
@@ -26,8 +25,8 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
 // Root route
-app.get('/', (req, res) => {
-  res.send('Welcome to the Kinmel API!');
+app.get("/", (req, res) => {
+  res.send("Welcome to the Kinmel API!");
 });
 
 //routes
@@ -45,6 +44,5 @@ connectDB()
   })
   .catch((e) => {
     console.error("Failed to connect to the database:", e);
-    process.exit(1); // Exit process with failure code
-  });
 
+  });
