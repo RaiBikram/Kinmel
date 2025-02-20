@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext, createContext,useEffect } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 import API from "../utils/axiosInstance";
 
 // Create the AuthContext
@@ -12,25 +12,25 @@ const AuthContextProvider = ({ children }) => {
     token: "",
   });
 
+  useEffect(() => {
+    const data = localStorage.getItem("auth");
+    if (data) {
+      const parseData = JSON.parse(data);
+      setAuth({
+        user: parseData.user,
+        token: parseData.token,
+      });
+    }
+  }, []);
 
-  //default axios 
+  // Update axios default headers whenever auth.token changes
+  useEffect(() => {
+    if (auth.token) {
+      axios.defaults.headers.common["Authorization"] = auth.token;
+      API.defaults.headers.common["Authorization"] = auth.token;
+    }
+  }, [auth.token]);
 
-  axios.defaults.headers.common['Authorization'] = auth?.token;
-  API.defaults.headers.common['Authorization'] = auth?.token;
-
-  
-useEffect(()=>{
-  const data = localStorage.getItem("auth");
-  if(data){
-    const parseData = JSON.parse(data);
-    setAuth({
-      ...auth,
-      user:parseData.user,
-      token:parseData.token,
-    })
-  }
-  // eslint-disable-next-line no-console
-},[])
   return (
     <AuthContext.Provider value={[auth, setAuth]}>
       {children}

@@ -101,20 +101,23 @@ export default function ForgotPassword() {
                   Reset
                 </button>
                 <br />
-                <a
-                  className=" my-3"
+                <button
+                  className="my-3"
                   type="button"
                   style={{
                     color: "white",
-
                     textAlign: "center",
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    textDecoration: "underline",
                   }}
                   onClick={() => {
                     navigate("/login");
                   }}
                 >
                   Login
-                </a>
+                </button>
               </div>
             </div>
           </form>

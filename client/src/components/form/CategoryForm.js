@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function CategoryForm({ handleSubmit, value, setValue, placeholder }) {
+export default function CategoryForm({
+  handleSubmit,
+  value,
+  setValue,
+  placeholder,
+}) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Plolicy from "./pages/Plolicy";
@@ -24,6 +24,7 @@ import AllCategories from "./pages/AllCategories";
 import CategoryProduct from "./pages/CategoryProduct";
 import CartPage from "./pages/CartPage";
 import UserUpdate from "./pages/user/UserProfile";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (

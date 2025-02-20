@@ -22,7 +22,6 @@ export default function Login() {
         password: password.trim(),
       });
 
-      // console.log("Response:", res);
       if (res?.data?.success === true) {
         toast.success(res?.data?.message);
         setAuth({
@@ -88,20 +87,17 @@ export default function Login() {
                 Login
               </button>
               <br />
-              <a
+              <Link
+                to="/forgot-password"
                 style={{
                   color: "white",
                   textAlign: "center",
                   textDecoration: "underline",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  navigate("/forgot-password");
                 }}
                 className="my-3"
               >
                 Forgot Password?
-              </a>
+              </Link>
               <hr style={{ color: "white" }} />
 
               <Link

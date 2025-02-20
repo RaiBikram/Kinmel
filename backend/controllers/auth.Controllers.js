@@ -22,6 +22,17 @@ export const registerController = async (req, res) => {
       address,
       answer,
     } = req.body;
+    console.log(
+      "registger : ",
+      username,
+      fullname,
+      email,
+      password,
+      confirmPassword,
+      phone,
+      address,
+      answer
+    );
 
     // Validate user input using Joi schema
     const { error } = userSchemaValidation.validate(req.body);
@@ -92,8 +103,6 @@ export const registerController = async (req, res) => {
     });
   }
 };
-
-
 
 // Login User
 export const loginController = async (req, res) => {
@@ -297,4 +306,3 @@ export const updateProfileController = async (req, res) => {
     });
   }
 };
-

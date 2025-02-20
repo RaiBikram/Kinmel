@@ -14,9 +14,62 @@ export default function Header() {
   const [cart] = useCart();
 
   const handleLogOut = () => {
-    setAuth({ ...auth, user: null, token: "" });
+    setAuth({ user: null, token: "" });
     localStorage.removeItem("auth");
     toast.success("Logout Successfully !!!");
+  };
+
+  const renderUserAccount = () => {
+    if (auth?.user) {
+      return (
+        <li className="nav-item dropdown">
+          <a
+            className="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {auth?.user?.username}
+          </a>
+          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li className="nav-item">
+              <NavLink
+                to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
+                className="dropdown-item"
+              >
+                Dashboard
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/login"
+                className="dropdown-item"
+                onClick={handleLogOut}
+              >
+                Logout
+              </NavLink>
+            </li>
+          </ul>
+        </li>
+      );
+    } else {
+      return (
+        <>
+          <li className="nav-item">
+            <NavLink to="/register" className="nav-link">
+              Register
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/login" className="nav-link">
+              Login
+            </NavLink>
+          </li>
+        </>
+      );
+    }
   };
 
   return (
@@ -79,24 +132,14 @@ export default function Header() {
                     Categories
                   </Link>
                   <ul className="dropdown-menu">
-                    <li
-                      style={{
-                        textAlign: "center",
-                      }}
-                    >
+                    <li style={{ textAlign: "center" }}>
                       <Link className="dropdown-item" to="/">
                         All Categories
                       </Link>
-                      {/* <Link className="dropdown-item" to="/all-categories">
-                        All Categories
-                      </Link> */}
                     </li>
                     {categories?.map((cat) => (
                       <li key={cat._id}>
-                        <Link
-                          className="dropdown-item"
-                          to={`/category/${cat.slug}`}
-                        >
+                        <Link className="dropdown-item" to={`/category/${cat.slug}`}>
                           {cat.name}
                         </Link>
                       </li>
@@ -105,61 +148,11 @@ export default function Header() {
                 </li>
 
                 {/* User Account */}
-                {auth?.user ? (
-                  <li className="nav-item dropdown">
-                    <a
-                      className="nav-link dropdown-toggle"
-                      href="#"
-                      id="navbarDropdownMenuLink"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      {auth?.user?.username}
-                    </a>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="navbarDropdownMenuLink"
-                    >
-                      <li className="nav-item">
-                        <NavLink
-                          to={`/dashboard/${
-                            auth?.user?.role === 1 ? "admin" : "user"
-                          }`}
-                          className="dropdown-item"
-                        >
-                          Dashboard
-                        </NavLink>
-                      </li>
-                      <li className="nav-item">
-                        <NavLink
-                          to="/login"
-                          className="dropdown-item"
-                          onClick={handleLogOut}
-                        >
-                          Logout
-                        </NavLink>
-                      </li>
-                    </ul>
-                  </li>
-                ) : (
-                  <>
-                    <li className="nav-item">
-                      <NavLink to="/register" className="nav-link">
-                        Register
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink to="/login" className="nav-link">
-                        Login
-                      </NavLink>
-                    </li>
-                  </>
-                )}
+                {renderUserAccount()}
 
                 {/* Cart */}
                 <li className="nav-item">
-                  <Badge count={cart?.length} offset={[10, 10]}>
+                  <Badge count={cart?.length || 0} offset={[10, 10]}>
                     <NavLink to="/cart" className="nav-link fs-6">
                       Cart
                     </NavLink>

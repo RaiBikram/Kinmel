@@ -15,27 +15,8 @@ export default function HomePage() {
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
   const [loadingFilter, setLoadingFilter] = useState(false);
-  // const [total, setTotal] = useState(0);
-  // const [page, setPage] = useState(1);
 
-  // Get total product count
-  // const getTotal = async () => {
-  //   try {
-  //     const { data } = await API.get("product/product-count");
-  //     setTotal(data?.total_product);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // Handle category filter
-  const handleFilter = (checkedValue, id) => {
-    const updatedChecked = checkedValue
-      ? [...checked, id]
-      : checked.filter((c) => c !== id);
-    setChecked(updatedChecked);
-  };
-  //get all categories
+  // Get all categories
   const getAllCategories = async () => {
     try {
       const { data } = await API.get("/category/all-category");
@@ -46,11 +27,11 @@ export default function HomePage() {
       }
     } catch (error) {
       toast.error("An error occurred while fetching categories.");
-      console.error("Error fetching categories:", error); // Log the error
+      console.error("Error fetching categories:", error);
     }
   };
 
-  //get all products
+  // Get all products
   const getAllProducts = async () => {
     try {
       setLoadingFilter(true);
@@ -90,11 +71,26 @@ export default function HomePage() {
     getAllProducts(); // Reload all products
   };
 
+  // Handle category filter
+  const handleFilter = (checkedValue, id) => {
+    const updatedChecked = checkedValue
+      ? [...checked, id]
+      : checked.filter((c) => c !== id);
+    setChecked(updatedChecked);
+  };
+
+  // Add to cart
+  const handleAddToCart = (product) => {
+    const updatedCart = [...cart, product];
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    toast.success("Item added to cart");
+  };
+
   // Initial data fetch
   useEffect(() => {
     getAllCategories();
     getAllProducts();
-    // getTotal();
   }, []);
 
   // Fetch products when filters change
@@ -180,14 +176,7 @@ export default function HomePage() {
                       </button>
                       <button
                         className="btn btn-primary ms-1"
-                        onClick={() => {
-                          setCart([...cart, product]);
-                          localStorage.setItem(
-                            "cart",
-                            JSON.stringify([...cart, product])
-                          );
-                          toast.success("Item added to cart");
-                        }}
+                        onClick={() => handleAddToCart(product)}
                       >
                         Add To Cart
                       </button>

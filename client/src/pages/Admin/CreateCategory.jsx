@@ -57,7 +57,7 @@ export default function CreateCategory() {
     }
     try {
       const { data } = await API.put(
-        "category/update-category/${selected._id}",
+        `category/update-category/${selected._id}`,
         { name: updatedName }
       );
       if (data?.success) {
@@ -78,7 +78,7 @@ export default function CreateCategory() {
   const handleDelete = async (categoryId) => {
     try {
       const { data } = await API.delete(
-        "category/delete-category/${categoryId}"
+        `category/delete-category/${categoryId}`
       );
       if (data?.success) {
         toast.success("Category deleted successfully.");

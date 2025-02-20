@@ -67,7 +67,10 @@ export default function UpdateProduct() {
       productData.append("shipping", shipping);
       productData.append("price", price);
 
-      const response = await API.put(`/product/update-product/${pid}`, productData);
+      const response = await API.put(
+        `/product/update-product/${pid}`,
+        productData
+      );
 
       if (response?.data?.success) {
         toast.success("Product updated successfully!");
@@ -83,16 +86,16 @@ export default function UpdateProduct() {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const answer = window.prompt("Are you sure you want to delete this product?, Yes or No " );
-      if (answer== "yes" || "YES" || "Yes"){
+      const answer = window.prompt(
+        "Are you sure you want to delete this product?, Yes or No "
+      );
+      if (answer === "yes" || answer === "YES" || answer === "Yes") {
         const { data } = await API.delete(`/product/delete-product/${pid}`);
         if (data?.success) {
           toast.success("Product deleted successfully");
           navigate("/dashboard/admin/products");
         }
-      }
-
-      else {
+      } else {
         toast.error("Failed to delete product.");
       }
     } catch (error) {
@@ -116,7 +119,7 @@ export default function UpdateProduct() {
               showSearch
               className="form-select mb-3"
               value={category}
-              onChange={value => setCategory(value)}
+              onChange={(value) => setCategory(value)}
               required
             >
               {categories?.map((cat) => (
@@ -153,6 +156,7 @@ export default function UpdateProduct() {
                     src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${pid}`}
                     height={"200px"}
                     className="img img-responsive"
+                    alt="Not found"
                   />
                 </div>
               )}
@@ -215,7 +219,11 @@ export default function UpdateProduct() {
               <button type="submit" className="btn btn-primary">
                 Update Product
               </button>
-              <button type="button" className="btn btn-danger ml-2" onClick={handleDelete}>
+              <button
+                type="button"
+                className="btn btn-danger ml-2"
+                onClick={handleDelete}
+              >
                 Delete Product
               </button>
             </div>
