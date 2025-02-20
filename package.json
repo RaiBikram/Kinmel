@@ -16,7 +16,6 @@
   "author": "Bikram Rai",
   "license": "ISC",
   "dependencies": {
-    "gopd": "^1.2.0",
     "joi": "^17.13.3"
   }
 }
