@@ -47,3 +47,4 @@ connectDB()
     console.error("Failed to connect to the database:", e);
     process.exit(1); // Exit process with failure code
   });
+
